@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -13,6 +14,13 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+
+        float volumenGuardado = PlayerPrefs.GetFloat("VolumenEfectos", 1f);
+
+        if (audioSource != null)
+        {
+            audioSource.volume = volumenGuardado;
+        }
     }
 
     public void PlayJump()
@@ -28,5 +36,13 @@ public class AudioManager : MonoBehaviour
     public void PlayGameOver()
     {
         audioSource.PlayOneShot(gameOverSound);
+    }
+
+    public void CambiarVolumenEfectos(float volumen)
+    {
+        if (audioSource != null)
+        {
+            audioSource.volume = volumen;
+        }
     }
 }
